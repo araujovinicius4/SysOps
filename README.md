@@ -1,68 +1,139 @@
-﻿# Analista de TI – Sistemas Operacionais
+# SysOps — Perfil e Gestão de Atividades Profissionais em Sistemas Operacionais
 
-Perfil profissional informativo de Analista de TI – Sistemas Operacionais, HU-UFPI | HU Brasil/Ebserh.
+O **SysOps** é uma aplicação web para apresentar o escopo de atuação de um **Analista de TI – Sistemas Operacionais** e, em ambiente local de desenvolvimento, organizar registros de competências técnicas, atividades, projetos, capacitações e documentação profissional.
 
-Consulte o [relatório de proteção de dados pessoais](PRIVACIDADE.md) antes de publicar. A apresentação usa identificação profissional genérica; o protótipo não é um portal institucional oficial.
+O projeto utiliza como contexto de referência o **HU-UFPI | HU Brasil/Ebserh**, mas **não é um sistema institucional oficial**, não representa autorização da instituição e não substitui seus canais administrativos ou operacionais.
 
-A interface React existente foi adaptada, preservando a paleta laranja, tipografia, componentes, ilustrações de infraestrutura, animações e organização visual. Não há oferta comercial, abertura de chamados ou representação de portal institucional oficial.
+## Problema que o projeto procura resolver
 
-## Execução
+O trabalho de administração de sistemas operacionais envolve diagnóstico, manutenção, estudos técnicos, documentação e aperfeiçoamento contínuo. Quando informações sobre essas atividades ficam espalhadas entre anotações e arquivos, torna-se difícil:
 
-```powershell
-npm.cmd install
-npm.cmd run dev
+- distinguir atribuições formais de experiências efetivamente realizadas;
+- registrar atividades concluídas, em andamento e apenas propostas;
+- acompanhar competências e necessidades de capacitação;
+- organizar projetos por problema, objetivo, solução e situação;
+- manter evidências e documentação técnica acessíveis;
+- apresentar um panorama profissional claro, sem divulgar informações restritas.
+
+O SysOps busca reunir esses registros em uma estrutura única, com categorias e situações explícitas. **Organizar registros não equivale a comprovar sua execução ou validação institucional**: os dados são informados pelo usuário.
+
+## O que está implementado
+
+### Página pública
+
+- Apresentação informativa do emprego e do contexto profissional.
+- Oito atribuições de referência, sintetizadas a partir de documento institucional.
+- Dez áreas de competência técnica, sem atribuição automática de nível de conhecimento.
+- Seções de atividades, projetos e contato, com avisos sobre o caráter não oficial da página.
+- Interface responsiva para desktop e dispositivos móveis.
+
+### Área local de trabalho (somente desenvolvimento)
+
+- **Dashboard:** contagens de registros e acompanhamento do progresso informado em capacitações.
+- **Competências:** cadastro de conhecimentos, nível autodeclarado e evidências.
+- **Atividades:** registro de descrição, categoria, data, resultados e situação (realizada, em andamento, proposta ou estudo/capacitação).
+- **Projetos:** descrição do problema, objetivo, solução, tecnologias, benefícios e estágio da proposta. A situação “Autorizado” exige referência informada pelo usuário, mas o sistema não verifica a autorização.
+- **Capacitações:** objetivos, competências relacionadas, progresso percentual, evidências e vínculo com atribuições do emprego.
+- **Documentação:** cadastro e exportação local de conteúdo textual.
+- **Perfil e acesso de demonstração:** contas locais de teste e registros separados por conta no navegador.
+
+As informações cadastradas localmente **não são publicadas automaticamente** na página pública.
+
+## Tecnologias
+
+| Componente | Tecnologia |
+| --- | --- |
+| Interface | React 19 e TypeScript |
+| Navegação | React Router 7 |
+| Ferramentas de desenvolvimento e build | Vite 6 |
+| Estilos | Tailwind CSS 4 e CSS |
+| Ícones | Lucide React |
+| Persistência do protótipo | LocalStorage |
+| Testes automatizados | Playwright |
+
+**Não há backend, API de persistência ou banco de dados implementados nesta versão.**
+
+## Organização do código
+
+```text
+SysOps/
+├── src/
+│   ├── components/       # Componentes visuais e navegação
+│   ├── data/             # Referências e modelos de formulários
+│   ├── hooks/            # Estado da aplicação e registros profissionais
+│   ├── layouts/          # Estrutura da área interna
+│   ├── pages/            # Página pública, dashboard e cadastros
+│   ├── services/         # Acesso ao armazenamento local
+│   ├── types/            # Tipos TypeScript
+│   ├── utils/            # Utilitários
+│   ├── main.tsx          # Rotas e inicialização
+│   └── styles.css        # Estilos
+├── tests/                # Testes de interface
+├── index.html
+├── package.json
+├── vite.config.ts
+├── playwright.config.ts
+└── PRIVACIDADE.md
 ```
 
-O Vite serve o protótipo em http://127.0.0.1:5173. A opção “Área local” permite criar uma conta de teste ou acessar a demonstração. Use somente dados fictícios e senhas exclusivas de teste.
+O repositório também contém componentes e estruturas legadas de solicitações e infraestrutura. As antigas rotas de solicitações redirecionam para **Atividades**; as de infraestrutura, para **Atribuições**. Essas estruturas não devem ser confundidas com módulos operacionais ativos.
 
-```powershell
-npm.cmd run build
-npm.cmd test
+## Como executar
+
+Requisitos: Node.js e npm compatíveis com as dependências do projeto.
+
+```bash
+npm install
+npm run dev
 ```
 
-Execute o build antes dos testes: o Playwright inicia o servidor de desenvolvimento na porta 5173 e o preview do build na 5174, usando o Microsoft Edge instalado. `npm.cmd run preview` permite inspecionar a versão de produção.
+Acesse **http://127.0.0.1:5173**. Na área local, utilize a demonstração ou crie uma conta exclusivamente para testes. **Não use credenciais reais nem informações sensíveis.**
 
-## Conteúdo e funcionalidades
+Para gerar e inspecionar a versão de produção:
 
-- Página pública com identificação fornecida pelo titular, sobre, oito atribuições, dez áreas de competência sem classificação automática, atividades, projetos, desenvolvimento e contato.
-- Dashboard com contagens dos registros locais e média do progresso informado nas capacitações. Nenhuma experiência profissional ou certificação é presumida.
-- Cadastro, consulta, filtros, edição e exclusão confirmada de competências, atividades, projetos, capacitações e documentação.
-- Atividades distinguem realizadas, em andamento, propostas e estudos/capacitações. Projetos permitem todas as situações solicitadas; a situação “Autorizado” exige uma referência da autorização, informada pelo usuário e não verificada pela aplicação.
-- Capacitações registram competência, curso, objetivo, progresso de 0 a 100%, evidências e relação com o emprego. Documentações podem ser baixadas em texto.
-- Registros do protótipo ficam separados por conta no navegador. Esse isolamento é demonstrativo, não autorização segura.
-- Dados locais não são publicados automaticamente no perfil público. As seções públicas começam sem atividades, projetos e capacitações confirmados. Os indicadores públicos referem-se apenas a conteúdo publicado, não aos testes locais.
-- Nenhum contato pessoal foi inventado. Não há envio de mensagens ou uso de logotipos institucionais.
+```bash
+npm run build
+npm run preview
+```
 
-As atribuições foram sintetizadas a partir da Descrição Sumária das Atribuições da HU Brasil de setembro de 2026, páginas 12–13. São referências do emprego, não declarações de experiência do titular:
-https://www.gov.br/hubrasil/pt-br/acesso-a-informacao/agentes-publicos/demonstrativos-de-quadro-de-pessoal-remuneracoes-e-beneficios/cargos-carreiras-e-beneficios/plano-de-cargos-e-beneficios/descricao-sumaria-das-atribuicoes-dos-cargos-efetivos-cargos-comissionados-e-funcoes-gratificadas-2026.pdf/view
+O build é gerado em `dist/`.
 
-## Autenticação e produção
+### Testes
 
-Conforme decisão do titular, a edição permanece disponível exclusivamente no servidor de desenvolvimento (`import.meta.env.DEV`). O build de produção bloqueia login, cadastro e todas as rotas de edição, mesmo com uma sessão local preexistente ou forjada. O contexto não lê nem escreve dados do navegador em produção.
+```bash
+npm run build
+npm test
+```
 
-A autenticação local com resumo SHA-256 e localStorage é apenas uma simulação. Não representa segurança de produção. Para habilitar edição privada real será necessário integrar um backend com autenticação, autorização no servidor e armazenamento adequado. Não habilite edição em produção removendo apenas o bloqueio do cliente.
+A configuração atual do Playwright utiliza **Microsoft Edge** e comandos `npm.cmd`, adequados ao Windows. Para executar os testes em Linux, adapte `playwright.config.ts` para utilizar `npm` e um navegador disponível. Os testes abrangem navegação, responsividade, cadastros, persistência local, isolamento demonstrativo de contas e bloqueio de edição em produção.
 
-Não registre dados de pacientes, credenciais, topologias internas ou informações restritas. Este ambiente não substitui sistemas e canais administrativos e operacionais institucionais.
+## Limitações e cuidados de segurança
 
-## Dados existentes
+- **Produção somente informativa:** o build de produção bloqueia login, cadastro e rotas de edição. O bloqueio está implementado no cliente e não substitui autorização em servidor.
+- **Autenticação simulada:** as contas locais e os resumos SHA-256 no navegador são recursos de prototipagem, não um sistema seguro de autenticação.
+- **Dados locais:** os registros dependem do armazenamento do navegador e podem ser perdidos se esse armazenamento for limpo.
+- **Sem comprovação automática:** níveis de competência, resultados, progresso e referências de autorização são declarados pelo usuário.
+- **Sem integração institucional:** não há conexão com sistemas administrativos, servidores, inventário real, chamados ou dados da HU Brasil/Ebserh.
+- **Privacidade:** não cadastre dados de pacientes, senhas, endereços internos, topologias, documentos sigilosos ou outras informações restritas.
 
-A chave `sysops:professional-records:v1` guarda os novos registros; as chaves de contas e sessão foram mantidas. Registros legados do SysOps não são apagados nem convertidos em histórico profissional. A demonstração profissional usa uma conta própria, separada da antiga conta de exemplo. Rotas antigas de solicitações redirecionam para atividades; rotas de infraestrutura redirecionam para atribuições. Componentes e fontes legadas foram conservados, mas não fazem parte da navegação ativa.
+Consulte [PRIVACIDADE.md](PRIVACIDADE.md) para o escopo da revisão de exposição de dados pessoais. Antes de publicar, revise também os arquivos estáticos e o histórico do repositório.
 
-## Arquivos alterados
+## Possíveis evoluções
 
-- `src/data/professional.ts`: identidade, avisos, referência institucional, atribuições, opções e campos dos cadastros.
-- `src/pages/Landing.tsx`: conteúdo e seções públicas adaptados na estrutura existente.
-- `src/pages/Dashboard.tsx`: indicadores e acompanhamento profissional.
-- `src/pages/Professional.tsx`: atribuições e gerenciamento das cinco coleções.
-- `src/hooks/useProfessional.ts` e `src/hooks/useApp.tsx`: registros por conta e bloqueio de gravação em produção.
-- `src/components/Header.tsx`, `Sidebar.tsx`, `ui.tsx`: marca, menus e cards reutilizados.
-- `src/layouts/AppLayout.tsx`, `src/pages/Auth.tsx`, `Profile.tsx`, `Legal.tsx`: contexto profissional, acesso e aviso institucional.
-- `src/main.tsx` e `src/vite-env.d.ts`: rotas, redirecionamentos e tipos do Vite.
-- `src/styles.css`: ajustes necessários à marca longa, campos e navegação responsiva; tokens laranja preservados.
-- `index.html`: título, descrição e cor de tema.
-- `tests/app.spec.ts` e `playwright.config.ts`: validação do perfil, cadastros, persistência, isolamento, responsividade e bloqueio de produção.
-- `dist/`: artefatos de produção regenerados.
+As funcionalidades abaixo **não estão implementadas** e dependem de definição de requisitos e validação técnica:
 
-## Validação
+1. Backend com autenticação, autorização e persistência segura.
+2. Exportação e backup estruturado dos registros profissionais.
+3. Relatórios periódicos de atividades, capacitações e documentação.
+4. Publicação seletiva de informações profissionais revisadas.
+5. Melhorias na rastreabilidade de evidências e no vínculo entre atividades e atribuições.
 
-Os testes verificam a identificação, oito cards, ausência de classificação automática, navegação pública em seis larguras (360–1440px), páginas internas em três larguras, edição móvel, foco laranja, cadastro das cinco coleções, persistência, filtros, documentação, contas locais, isolamento, exclusão confirmada, preservação de registros legados e bloqueio da edição no build de produção. As capturas são geradas em `test-results/`.
+## Referência das atribuições
+
+As atribuições apresentadas são uma síntese da **Descrição Sumária das Atribuições dos Cargos**, HU Brasil/Ebserh, edição de 2026, páginas 12–13. São referências ao escopo do emprego e **não uma declaração de experiência individual**.
+
+[Consultar documento institucional](https://www.gov.br/hubrasil/pt-br/acesso-a-informacao/agentes-publicos/demonstrativos-de-quadro-de-pessoal-remuneracoes-e-beneficios/cargos-carreiras-e-beneficios/plano-de-cargos-e-beneficios/descricao-sumaria-das-atribuicoes-dos-cargos-efetivos-cargos-comissionados-e-funcoes-gratificadas-2026.pdf/view)
+
+---
+
+**SysOps** — organização e apresentação informativa de atividades profissionais em Sistemas Operacionais. Projeto independente, sem caráter de portal institucional oficial.
